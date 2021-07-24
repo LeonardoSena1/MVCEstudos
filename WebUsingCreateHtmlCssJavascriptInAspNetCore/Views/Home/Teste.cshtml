@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "Teste";
+}
+
+@model WebUsingCreateHtmlCssJavascriptInAspNetCore.Models.CepModel
+
+<div class="container">
+    <div>
+        <form action="Teste" method="post">
+            <label for="cep"></label>
+            <input type="text" asp-for="cep" class="cepStyle" maxlength="8" />
+            <button id="botao" style="background-color: #04AA6D !important;">
+                Consultar o Cep
+            </button>
+        </form>
+
+        <table id="customers">
+            <tr>
+                <th style="text-align: center;">Rua</th>
+                <th style="text-align: center;">Cidade</th>
+                <th style="text-align: center;">Bairro</th>
+                <th style="text-align: center;">Uf</th>
+            </tr>
+            <tr>
+                <td style="text-align: center;">@Model.logradouro</td>
+                <td style="text-align: center;">@Model.localidade</td>
+                <td style="text-align: center;">@Model.bairro</td>
+                <td style="text-align: center;">@Model.uf</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div id="maps">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4459028.325711805!2d-50.15228411875706!3d-23.399063016997104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce597d462f58ad%3A0x1e5241e2e17b7c17!2sState%20of%20S%C3%A3o%20Paulo!5e0!3m2!1sen!2sbr!4v1627143692812!5m2!1sen!2sbr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+</div>
+
+
+<script type="text/javascript">
+    const inputValue = document.querySelector(".cepStyle");
+    let zipCode = "";
+
+    inputValue.addEventListener("keyup", () => {
+        zipCode = inputValue.value;
+        if (zipCode)
+            if (zipCode.length === 8) {
+                inputValue.value = `${zipCode.substr(0, 5)}-${zipCode.substr(5, 9)}`;
+            }
+    });
+</script>
